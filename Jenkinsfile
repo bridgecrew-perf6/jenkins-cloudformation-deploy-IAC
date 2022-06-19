@@ -8,9 +8,9 @@ node{
         sh " '${maven_Home}/bin/mvn' clean install package"
     }
 
-    stage ('Deploy to Container'){
-    deploy adapters: [tomcat8(credentialsId: 'TOMCATID', path: '', url: 'http://192.168.0.116:8088/')], contextPath: null, war: '**/*.war'
-    }
+   // stage ('Deploy to Container'){
+   // deploy adapters: [tomcat8(credentialsId: 'TOMCATID', path: '', url: 'http://192.168.0.116:8088/')], contextPath: null, war: '**/*.war'
+   // }
         
     
     stage ('Docker Build'){
