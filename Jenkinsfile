@@ -24,7 +24,11 @@ node{
                    
         }
         
-    
+    stage ('Ansible Deploy to Target'){
+       sh "ansible -i /etc/ansible/hosts webservers -m ping"
+
+       sh "ansible-playbook /etc/ansible/firstplaybook.yml -i /etc/ansible/hosts"
+    }
 
     stage ( 'Docker push'){
         sh "docker push tawfiq15/aws:${BUILD_NUMBER}"
