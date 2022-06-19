@@ -1,17 +1,18 @@
 node{
     def maven_Home=tool  name:'maven'
     stage ('Pull from Github'){
-        git branch: 'main', credentialsId: 'githubID', url: ''
-        git credentialsId: 'githubID', url: ''
+        git branch: 'main', credentialsId: 'githubID', url: 'https://github.com/stm1510/jenkins-cloudformation-deploy-IAC.git'
+        git credentialsId: 'githubID', url: 'https://github.com/stm1510/jenkins-cloudformation-deploy-IAC.git'
     }
     
     stage ('Build'){
         sh " '${maven_Home}/bin/mvn' clean install package"
     }
 
-    // stage ('Deploy to Container'){
-        deploy adapters: [tomcat8(credentialsId: 'TOMCAT', path: '', url: 'http://52.90.127.229:8080/')], contextPath: null, war: '**/*.war'
-     }
+    stage ('Deploy to Container'){
+    deploy adapters: [tomcat8(credentialsId: 'TOMCATID', path: '', url: 'http://192.168.0.116:8088')], contextPath: null, war: '**/*.war'
+    }
+        
     
     stage ('Docker Build'){
         sh " docker build -t tawfiq15/aws:${BUILD_NUMBER} . "
