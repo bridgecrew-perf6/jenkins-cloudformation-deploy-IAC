@@ -1,8 +1,7 @@
 node{
     def maven_Home=tool  name:'maven'
     stage ('Pull from Github'){
-        git branch: 'main', credentialsId: 'githubID', url: 'https://github.com/stm1510/jenkins-cloudformation-deploy-IAC.git'
-        git credentialsId: 'githubID', url: 'https://github.com/stm1510/jenkins-cloudformation-deploy-IAC.git'
+        git branch: 'main', credentialsId: 'GithubID', url: 'https://github.com/stm1510/jenkins-cloudformation-deploy-IAC.git'
     }
     
     stage ('Build'){
