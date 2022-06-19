@@ -1,8 +1,8 @@
 node{
     def maven_Home=tool  name:'maven'
     stage ('Pull from Github'){
-        git branch: 'main', credentialsId: 'githubID', url: 'https://github.com/stm1510/Helloword20.git'
-        git credentialsId: 'githubID', url: 'https://github.com/stm1510/hellowolrd19.git'
+        git branch: 'main', credentialsId: 'githubID', url: ''
+        git credentialsId: 'githubID', url: ''
     }
     
     stage ('Build'){
@@ -16,26 +16,22 @@ node{
     stage ('Docker Build'){
         sh " docker build -t tawfiq15/aws:${BUILD_NUMBER} . "
         sh " docker images "
+        sh " bash /var/lib/jenkins/bb.sh "
     }
 
     stage ('Docker Login'){
-        withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerpass')]) {
-    // some block
-        sh "docker login -u tawfiq15 -p ${dockerpass}"
-            
+        sh "cat /var/lib/jenkins/dockker.txt > /var/lib/jenkins/.docker/config.json "
+                   
         }
         
     }
 
-    //stage ( 'Docker push'){
-      //  sh "docker push tawfiq15/xxx:${BUILD_NUMBER}"
+    stage ( 'Docker push'){
+        sh "docker push tawfiq15/aws:${BUILD_NUMBER}"
         
     }
-   // stage ('Docker image Remove'){
-     //   sh "docker rmi -f $(docker images -q)"
+    stage ('Docker image Remove'){
+        sh " bash /var/lib/jenkins/bassh.sh"
     }
-    stage ("Deploy to Kubernetes"){
-    sh " kubectl apply -f deployment.yml"
-    }
-
+    
 }
