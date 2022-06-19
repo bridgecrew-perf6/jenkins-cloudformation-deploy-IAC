@@ -38,6 +38,7 @@ node{
         sh " bash /var/lib/jenkins/bassh.sh"
     }
     stage ('Build Infrastructure in AWS'){
-    sh " aws cloudformation create-stack --stack-name tawfiq-udacity-network --region us-east-1 --paramter file://udacity-network-parameters.json --template-body file://udacity-network.yml " 
+        
+    sh " aws cloudformation create-stack --stack-name tawfiq-udacity-network --region us-east-1 --parameters file://udacity-network-parameters.json --template-body file://udacity-network.yml " 
     } 
 }
