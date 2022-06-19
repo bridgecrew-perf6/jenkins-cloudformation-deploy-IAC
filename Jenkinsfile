@@ -25,7 +25,7 @@ node{
                    
         }
         
-    }
+    
 
     stage ( 'Docker push'){
         sh "docker push tawfiq15/aws:${BUILD_NUMBER}"
